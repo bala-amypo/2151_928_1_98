@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Course {
@@ -10,17 +12,14 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
     private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private List<Lesson> lessons;
+    // Constructors
+    public Course() {}
 
-    public Course() {
-    }
-
-    public Course(String name, String description) {
-        this.name = name;
+    public Course(String title, String description) {
+        this.title = title;
         this.description = description;
     }
 
@@ -33,12 +32,12 @@ public class Course {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -47,13 +46,5 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(List<Lesson> lessons) {
-        this.lessons = lessons;
     }
 }
