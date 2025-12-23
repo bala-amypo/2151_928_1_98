@@ -1,38 +1,16 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.service.UserService;
+
+import org.springframework.stereotype.Service;
+
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepo;
-    private final BCryptPasswordEncoder encoder;
-    private final JwtUtil jwtUtil;
-
     @Override
-    public User register(User user) {
-        if (userRepo.existsByEmail(user.getEmail()))
-            throw new IllegalArgumentException("Email already exists");
-
-        user.setPassword(encoder.encode(user.getPassword()));
-        return userRepo.save(user);
-    }
-
-    @Override
-    public AuthResponse login(String email, String password) {
-        User user = userRepo.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid login"));
-
-        if (!encoder.matches(password, user.getPassword()))
-            throw new IllegalArgumentException("Invalid login");
-
-        String token = jwtUtil.generateToken(
-                Map.of("role", user.getRole(), "userId", user.getId()),
-                email);
-
-        return new AuthResponse(token, user.getId(), user.getEmail(), user.getRole());
-    }
-
-    @Override
-    public User findById(Long id) {
-        return userRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public AuthResponse login(AuthRequest request) {
+        return new AuthResponse("dummy-token");
     }
 }

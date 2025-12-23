@@ -1,5 +1,8 @@
+package com.example.demo.service;
+
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
+
 public interface UserService {
-    User register(User user);
-    AuthResponse login(String email, String password);
-    User findById(Long id);
+    AuthResponse login(AuthRequest request);
 }
