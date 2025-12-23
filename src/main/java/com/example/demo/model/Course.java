@@ -15,7 +15,6 @@ public class Course {
     private String title;
     private String description;
 
-    // Constructors
     public Course() {}
 
     public Course(String title, String description) {
@@ -23,13 +22,8 @@ public class Course {
         this.description = description;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

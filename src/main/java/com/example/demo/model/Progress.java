@@ -13,43 +13,25 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User user; // Make sure you have a User entity
+    private Long userId;
 
     @ManyToOne
     private Lesson lesson;
 
     private boolean completed;
 
-    // Constructors
     public Progress() {}
 
-    public Progress(User user, Lesson lesson, boolean completed) {
-        this.user = user;
-        this.lesson = lesson;
-        this.completed = completed;
-    }
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public Long getUserId() {
+        return userId;
     }
 
     public void setUserId(Long userId) {
-        if (this.user == null) this.user = new User();
-        this.user.setId(userId);
+        this.userId = userId;
     }
 
     public Lesson getLesson() {

@@ -18,7 +18,6 @@ public class Lesson {
     @ManyToOne
     private Course course;
 
-    // Constructors
     public Lesson() {}
 
     public Lesson(String title, Course course) {
@@ -26,13 +25,8 @@ public class Lesson {
         this.course = course;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
