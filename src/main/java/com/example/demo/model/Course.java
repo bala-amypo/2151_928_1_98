@@ -11,20 +11,30 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
-    @ManyToOne
-    private User instructor;
+    private String description;
 
     private LocalDateTime createdAt;
 
-    public Course() {}
+    // ===== Constructors =====
+    public Course() {
+    }
+
+    public Course(Long id, String title, String description, LocalDateTime createdAt) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
 
     @PrePersist
-    public void prePersist() {
+    public void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
 
+    // ===== Getters & Setters =====
     public Long getId() {
         return id;
     }
@@ -41,15 +51,19 @@ public class Course {
         this.title = title;
     }
 
-    public User getInstructor() {
-        return instructor;
+    public String getDescription() {
+        return description;
     }
 
-    public void setInstructor(User instructor) {
-        this.instructor = instructor;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
