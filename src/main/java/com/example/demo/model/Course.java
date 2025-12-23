@@ -1,22 +1,24 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "courses")
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
-
+    private String name;
     private String description;
 
-    private LocalDateTime createdAt;
+    @OneToMany(mappedBy = "course")
+    private List<Lesson> lessons;
+
+    // Getters and setters
+}
+
 
     // ===== Constructors =====
     public Course() {
