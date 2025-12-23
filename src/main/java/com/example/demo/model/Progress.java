@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,7 @@ public class Progress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long userId;
 
     @ManyToOne
@@ -16,5 +17,5 @@ public class Progress {
 
     private boolean completed;
 
-    // Getters & Setters
+    // Getters and Setters
 }

@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,7 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String content;
 
@@ -15,5 +16,5 @@ public class Lesson {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    // Getters & Setters
+    // Getters and Setters
 }
