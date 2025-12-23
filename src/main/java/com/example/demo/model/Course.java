@@ -13,30 +13,18 @@ public class Course {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Lesson> lessons;
 
-    // Getters and setters
-}
-
-
-    // ===== Constructors =====
     public Course() {
     }
 
-    public Course(Long id, String title, String description, LocalDateTime createdAt) {
-        this.id = id;
-        this.title = title;
+    public Course(String name, String description) {
+        this.name = name;
         this.description = description;
-        this.createdAt = createdAt;
     }
 
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    // ===== Getters & Setters =====
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -45,12 +33,12 @@ public class Course {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -61,11 +49,11 @@ public class Course {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
     }
 }
