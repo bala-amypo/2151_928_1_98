@@ -1,27 +1,44 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "progress")
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Progress {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private User user;
+    private BigDecimal completionPercentage;
 
-    @ManyToOne
-    private MicroLesson microLesson;
+    private LocalDateTime updatedAt;
 
-    private String status;
-    private Integer progressPercent;
-    private BigDecimal score;
-    private LocalDateTime lastAccessedAt;
+    public Progress() {}
 
-    @PrePersist
-    void init() {
-        lastAccessedAt = LocalDateTime.now();
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getCompletionPercentage() {
+        return completionPercentage;
+    }
+
+    public void setCompletionPercentage(BigDecimal completionPercentage) {
+        this.completionPercentage = completionPercentage;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

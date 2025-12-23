@@ -1,22 +1,23 @@
+package com.example.demo.controller;
+
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.service.UserService;
+
 import org.springframework.web.bind.annotation.*;
-import lombok.RequiredArgsConstructor;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/auth")
-@RequiredArgsConstructor
-@Tag(name = "Authentication")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final UserService userService;
 
-    @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
+    public AuthController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest req) {
-        return userService.login(req.getEmail(), req.getPassword());
+    public AuthResponse login(@RequestBody AuthRequest request) {
+        return userService.login(request);
     }
 }
