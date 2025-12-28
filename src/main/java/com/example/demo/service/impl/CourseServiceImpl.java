@@ -18,7 +18,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course createCourse(Course course) {
+    public Course saveCourse(Course course) {
         return courseRepository.save(course);
     }
 
@@ -31,18 +31,6 @@ public class CourseServiceImpl implements CourseService {
     public Course getCourseById(Long id) {
         Optional<Course> course = courseRepository.findById(id);
         return course.orElse(null);
-    }
-
-    @Override
-    public Course updateCourse(Long id, Course updatedCourse) {
-        return courseRepository.findById(id)
-                .map(course -> {
-                    course.setName(updatedCourse.getName());
-                    course.setDescription(updatedCourse.getDescription());
-                    course.setDuration(updatedCourse.getDuration());
-                    return courseRepository.save(course);
-                })
-                .orElse(null);
     }
 
     @Override
