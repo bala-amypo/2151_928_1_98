@@ -18,6 +18,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public Course createCourse(Course course) {
+        return courseRepository.save(course);
+    }
+
+    @Override
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
@@ -29,8 +34,19 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course saveCourse(Course course) {
-        return courseRepository.save(course);
+    public Course updateCourse(Long id, Course updatedCourse) {
+        return courseRepository.findById(id)
+                .map(course -> {
+                    course.setName(updatedCourse.getName());
+                    course.setDescription(updatedCourse.getDescription());
+                    course.setDuration(updatedCourse.getDuration());
+                    return courseRepository.save(course);
+                })
+                .orElse(null);
+    }
+
+    @Override
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
     }
 }
-    `
