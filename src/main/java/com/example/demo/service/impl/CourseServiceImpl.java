@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
         return course.orElse(null);
     }
 
-    @Override
+    // ❗ NO @Override HERE (method NOT declared in interface)
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
