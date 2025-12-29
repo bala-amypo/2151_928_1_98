@@ -2,9 +2,11 @@ package com.example.demo.service.impl;
 
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
-
+@Service
 public class LessonServiceImpl {
 
     private final MicroLessonRepository lessonRepo;
