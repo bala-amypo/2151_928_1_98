@@ -24,7 +24,7 @@ public class MicroLesson {
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    /* ================= FIELDS ================= */
+    /* ================= CORE FIELDS ================= */
 
     @Column(nullable = false)
     private String title;
@@ -36,7 +36,12 @@ public class MicroLesson {
     private String difficulty;    // EASY / MEDIUM / HARD
 
     @Column(nullable = false)
-    private Integer durationMinutes;   // ✅ MUST BE Integer (NOT BigDecimal)
+    private Integer durationMinutes;   // ✅ MUST be Integer
+
+    /* ================= EXTRA (REQUIRED BY TESTS) ================= */
+
+    @Column
+    private String tags;   // ✅ REQUIRED (builder().tags(), getTags())
 
     /* ================= AUDIT ================= */
 
