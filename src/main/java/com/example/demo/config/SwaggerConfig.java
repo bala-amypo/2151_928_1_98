@@ -16,12 +16,12 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
 
-        Server productionServer = new Server();
-        productionServer.setUrl("https://9165.408procr.amypo.ai");
-        productionServer.setDescription("Production Server");
+        Server server = new Server();
+        server.setUrl("https://9165.408procr.amypo.ai");
+        server.setDescription("Production Server");
 
         return new OpenAPI()
-                .servers(List.of(productionServer))
+                .servers(List.of(server))
                 .info(new Info()
                         .title("Demo API")
                         .description("Spring Boot REST API Documentation")
@@ -29,7 +29,7 @@ public class SwaggerConfig {
                         .contact(new Contact()
                                 .name("Demo Team")
                                 .email("support@example.com")
-                                .url("https://example.com"))
+                                .url("https://9165.408procr.amypo.ai"))
                         .license(new License()
                                 .name("Apache 2.0")
                                 .url("https://www.apache.org/licenses/LICENSE-2.0")));
