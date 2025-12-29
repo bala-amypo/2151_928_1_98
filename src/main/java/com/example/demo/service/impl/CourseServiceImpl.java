@@ -1,40 +1,38 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.Course;
-import com.example.demo.repository.CourseRepository;
-import com.example.demo.service.CourseService;
-import org.springframework.stereotype.Service;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
 
-import java.util.List;
-import java.util.Optional;
+public class CourseServiceImpl {
 
-@Service
-public class CourseServiceImpl implements CourseService {
+    private final CourseRepository courseRepo;
+    private final UserRepository userRepo;
 
-    private final CourseRepository courseRepository;
-
-    public CourseServiceImpl(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    public CourseServiceImpl(CourseRepository c, UserRepository u) {
+        this.courseRepo = c;
+        this.userRepo = u;
     }
 
-    @Override
-    public Course saveCourse(Course course) {
-        return courseRepository.save(course);
+    public Course createCourse(Course course, Long instructorId) {
+        User u = userRepo.findById(instructorId).orElseThrow(RuntimeException::new);
+        if (!"INSTRUCTOR".equals(u.getRole()) && !"ADMIN".equals(u.getRole()))
+            throw new RuntimeException();
+
+        if (courseRepo.existsByTitleAndInstructorId(course.getTitle(), instructorId))
+            throw new RuntimeException();
+
+        course.setInstructor(u);
+        return courseRepo.save(course);
     }
 
-    @Override
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public Course updateCourse(Long id, Course data) {
+        Course c = courseRepo.findById(id).orElseThrow(RuntimeException::new);
+        c.setTitle(data.getTitle());
+        c.setDescription(data.getDescription());
+        return courseRepo.save(c);
     }
 
-    @Override
-    public Course getCourseById(Long id) {
-        Optional<Course> course = courseRepository.findById(id);
-        return course.orElse(null);
-    }
-
-    // ❗ NO @Override HERE (method NOT declared in interface)
-    public void deleteCourse(Long id) {
-        courseRepository.deleteById(id);
+    public Course getCourse(Long id) {
+        return courseRepo.findById(id).orElseThrow(RuntimeException::new);
     }
 }
