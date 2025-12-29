@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MicroLesson {
@@ -18,6 +19,8 @@ public class MicroLesson {
     private String contentType;
     private String difficulty;
     private String tags;
+
+    private Integer durationMinutes;
 
     @ManyToOne
     private Course course;
