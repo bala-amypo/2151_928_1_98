@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Service   // ✅ THIS IS REQUIRED
+@Service 
 public class UserServiceImpl {
 
     private final UserRepository userRepository;
