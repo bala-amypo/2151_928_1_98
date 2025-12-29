@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,31 +29,23 @@ public class Progress {
     @JoinColumn(name = "micro_lesson_id", nullable = false)
     private MicroLesson microLesson;
 
-    /* ================= BUSINESS FIELDS ================= */
+    /* ================= FIELDS ================= */
 
-    @Column(nullable = false)
-    private String status;          // IN_PROGRESS / COMPLETED
+    private Integer progressPercent;
 
-    @Column(nullable = false)
-    private Integer progressPercent; // ✅ Integer (NOT BigDecimal)
+    private String status;   // IN_PROGRESS / COMPLETED
 
-    private Integer score;            // ✅ Integer (NOT BigDecimal)
+    @Column(precision = 5, scale = 2)
+    private BigDecimal score;   // ✅ MUST BE BigDecimal
 
-    /* ================= AUDIT FIELDS ================= */
+    /* ================= AUDIT ================= */
 
-    private LocalDateTime createdAt;
     private LocalDateTime lastAccessedAt;
 
     /* ================= JPA CALLBACK ================= */
 
     @PrePersist
     public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-        this.lastAccessedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
         this.lastAccessedAt = LocalDateTime.now();
     }
 }
